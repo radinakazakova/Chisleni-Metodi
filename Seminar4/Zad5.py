@@ -26,20 +26,13 @@ def newton_poly(nodes, values):
     polynomial_function = sympy.lambdify(x, res)
     return polynomial_function
 
-def formula(k,n):
-    return np.cos(((2*k - 1)/(2*n))*np.pi) 
+n = 11
+chebyshev_nodes = np.empty(n)
+for k in range(n):
+    chebyshev_nodes[k] = np.cos((2 * (k + 1) - 1) / (2 * n) * np.pi)
 
-
-def calcChebishoviVuzli(n):
-    res = []
-    for i in range(1,n):
-        res.append(formula(i,n))
-    return res
-
-n = 11;
-nodes = np.array(calcChebishoviVuzli(n))
-values = np.array(f(nodes))
-polynom = newton_poly(nodes, values)
+chebyshev_values = f(chebyshev_nodes)
+polynom = newton_poly(chebyshev_nodes, chebyshev_values)
 
 def abs_error(z):
     return np.abs(f(z) - polynom(z))
