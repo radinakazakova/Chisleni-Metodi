@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import math
 import sympy as sp
 
-
 x_values = [0, 0.03, 0.07, 0.15, 0.21, 0.27]
 
 def createMatrix(values):
@@ -31,5 +30,7 @@ def createPolynom(coeficient):
 
 polynom = createPolynom(coef)
 f = sp.lambdify(x, polynom)
-f(0) # okolo 1
-f(0.27) #smqta pravilno
+x_axis = np.linspace(0, 0.5, 1000)
+plt.scatter(x_values, y_values)
+plt.plot(x_axis, f(x_axis))
+plt.show()
