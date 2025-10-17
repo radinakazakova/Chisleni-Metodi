@@ -43,6 +43,20 @@ def createTrigPolynom(coeficient):
 
 polynom = createTrigPolynom(coef)
 f = sp.lambdify(x, polynom)
-f(1) #okolo 0
-f(4) #smqta pravilno
-f(6)
+x_axis = np.linspace(0, 4 * np.pi, 1000)
+plt.scatter(x_values, y_values)
+plt.plot(x_axis, f(x_axis))
+plt.show()
+
+def changePeriod(t, values):
+    return np.array([((2*np.pi)/t)*el for el in values])
+
+new_x_values = changePeriod(8, x_values)
+A2 = createTrigMatrix(new_x_values)
+coef2 = np.array(np.linalg.solve(A2, y_values))
+polynom2 = createTrigPolynom(coef2)
+f2 = sp.lambdify(x, polynom2)
+plt.scatter(new_x_values, y_values)
+plt.plot(x_axis, f2(x_axis))
+plt.show()
+    
